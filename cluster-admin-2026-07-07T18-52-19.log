@@ -1,0 +1,7 @@
+[18:52:19] Command : cluster-admin.py pause --cluster-name test-api
+[18:52:19] Started : 2026-07-07T18:52:19.357875
+[18:52:19] Log file: cluster-admin-2026-07-07T18-52-19.log
+[18:52:19] 
+[18:52:19] Pausing Atlas cluster: test-api
+[18:52:20] HTTP 400
+[18:52:20] {"detail":"The operation cannot begin because monitoring indicates these nodes have too much replication lag: atlas-zmm906-shard-00-02.wqko5.mongodb.net (52sec).","error":400,"errorCode":"OPERATION_INVALID_MEMBER_REPLICATION_LAG","parameters":["atlas-zmm906-shard-00-02.wqko5.mongodb.net (52sec)"],"reason":"Bad Request"}

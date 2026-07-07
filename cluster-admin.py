@@ -22,6 +22,7 @@
 """
 
 import argparse
+import json
 import sys
 import time
 from urllib.parse import quote
@@ -44,6 +45,13 @@ def log(msg: str = "", style: str = "") -> None:
     if _file_console is not None:
         ts = datetime.datetime.now().strftime("%H:%M:%S")
         _file_console.out(f"[{ts}] {msg}")
+
+
+def log_file_only(msg: str = "") -> None:
+    if _file_console is not None:
+        ts = datetime.datetime.now().strftime("%H:%M:%S")
+        for line in msg.splitlines() or [""]:
+            _file_console.out(f"[{ts}] {line}")
 
 ATLAS_PUBLIC_KEY = "ldccslle"
 ATLAS_PRIVATE_KEY = "9fd730e2-4869-4f01-b553-195a9b807c60"
@@ -68,6 +76,8 @@ HEADERS = {
 AUTH = HTTPDigestAuth(ATLAS_PUBLIC_KEY, ATLAS_PRIVATE_KEY)
 READY_TIMEOUT_SECONDS = 45 * 60
 READY_POLL_INTERVAL_SECONDS = 20
+PAUSE_RETRY_TIMEOUT_SECONDS = 15 * 60
+PAUSE_RETRY_INTERVAL_SECONDS = 30
 
 INSTANCE_SIZE_LADDER = [
     "M10", "M20", "M30", "M40", "M50",
@@ -77,8 +87,45 @@ INSTANCE_SIZE_LADDER = [
 
 def print_response(response: requests.Response) -> None:
     log(f"HTTP {response.status_code}", style="bold cyan")
-    log(response.text)
+
+    try:
+        response_json = response.json()
+    except ValueError:
+        response_json = None
+
+    if response_json is not None:
+        if not response.ok:
+            error_code = response_json.get("errorCode")
+            detail = response_json.get("detail")
+            if error_code:
+                log(f"Error code: {error_code}", style="bold red")
+            if detail:
+                log(detail, style="red")
+
+        log_file_only("Response body:")
+        log_file_only(json.dumps(response_json, indent=2, sort_keys=True))
+    else:
+        if response.text:
+            if not response.ok:
+                log(response.text, style="red")
+            log_file_only("Response body:")
+            log_file_only(response.text)
+
     response.raise_for_status()
+
+
+def get_response_error_code(response: requests.Response) -> str | None:
+    try:
+        return response.json().get("errorCode")
+    except ValueError:
+        return None
+
+
+def get_response_detail(response: requests.Response) -> str:
+    try:
+        return response.json().get("detail", response.text)
+    except ValueError:
+        return response.text
 
 
 def normalize_mongodb_major_version(version: str) -> str:
@@ -271,17 +318,49 @@ def pause_cluster(cluster_name: str, paused: bool) -> None:
     cluster_url = f"{BASE_URL}/{quote(cluster_name, safe='')}"
     action = "Pausing" if paused else "Resuming"
     log(f"{action} Atlas cluster: {cluster_name}", style="bold")
-    response = requests.patch(
-        cluster_url,
-        headers=HEADERS,
-        json={"paused": paused},
-        auth=AUTH,
-        timeout=60,
-    )
-    if response.status_code == 404:
-        log(f"Cluster '{cluster_name}' does not exist.", style="bold red")
-        sys.exit(1)
-    print_response(response)
+
+    deadline = time.time() + PAUSE_RETRY_TIMEOUT_SECONDS
+    while True:
+        response = requests.patch(
+            cluster_url,
+            headers=HEADERS,
+            json={"paused": paused},
+            auth=AUTH,
+            timeout=60,
+        )
+
+        if response.status_code == 404:
+            log(f"Cluster '{cluster_name}' does not exist.", style="bold red")
+            sys.exit(1)
+
+        if (
+            paused
+            and response.status_code == 400
+            and get_response_error_code(response)
+            == "OPERATION_INVALID_MEMBER_REPLICATION_LAG"
+        ):
+            detail = get_response_detail(response).strip()
+            if time.time() >= deadline:
+                log("HTTP 400", style="bold cyan")
+                log(response.text)
+                log(
+                    "Pause timed out while waiting for replication lag to clear.",
+                    style="bold red",
+                )
+                sys.exit(1)
+
+            log(
+                "Pause blocked by replication lag; retrying in "
+                f"{PAUSE_RETRY_INTERVAL_SECONDS}s.",
+                style="yellow",
+            )
+            log(detail, style="yellow")
+            time.sleep(PAUSE_RETRY_INTERVAL_SECONDS)
+            continue
+
+        print_response(response)
+        break
+
     if not paused:
         wait_for_cluster_ready(cluster_name=cluster_name)
     else:
