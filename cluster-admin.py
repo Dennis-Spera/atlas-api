@@ -19,6 +19,7 @@
         python cluster-admin.py delete --cluster-name YOUR_CLUSTER_NAME
         python cluster-admin.py pause  --cluster-name YOUR_CLUSTER_NAME
         python cluster-admin.py resume --cluster-name YOUR_CLUSTER_NAME
+        python cluster-admin.py list
 """
 
 import argparse
@@ -32,6 +33,7 @@ from requests.auth import HTTPDigestAuth
 import datetime
 from rich.console import Console
 from rich.live import Live
+from rich.table import Table
 from rich.text import Text
 
 # ATLAS_CLUSTER_NAME ATLAS_MONGODB_VERSION ATLAS_PROVIDER ATLAS_REGION ATLAS_INSTANCE_SIZE ATLAS_NODE_COUNT ATLAS_REGION_PRIORITY ATLAS_TAG_KEEP_UNTIL
@@ -383,6 +385,45 @@ def delete_cluster(cluster_name: str = ATLAS_CLUSTER_NAME) -> None:
     print_response(response)
 
 
+def list_clusters() -> None:
+    response = requests.get(BASE_URL, headers=HEADERS, auth=AUTH, timeout=60)
+    response.raise_for_status()
+    payload = response.json()
+
+    clusters = payload.get("results", [])
+    if not clusters:
+        log("No clusters found.", style="yellow")
+        log_file_only("No clusters found.")
+        return
+
+    table = Table(title="Atlas Clusters")
+    table.add_column("Name", style="cyan")
+    table.add_column("State", style="bold")
+    table.add_column("Paused")
+    table.add_column("Instance Size")
+
+    for cluster in clusters:
+        name = str(cluster.get("name", "-"))
+        state = str(cluster.get("stateName", "UNKNOWN"))
+        paused = "yes" if cluster.get("paused") else "no"
+
+        size = "-"
+        replication_specs = cluster.get("replicationSpecs", [])
+        if replication_specs:
+            region_configs = replication_specs[0].get("regionConfigs", [])
+            if region_configs:
+                size = str(
+                    region_configs[0].get("electableSpecs", {}).get("instanceSize", "-")
+                )
+
+        table.add_row(name, state, paused, size)
+        log_file_only(
+            f"cluster={name} state={state} paused={paused} instanceSize={size}"
+        )
+
+    _console.print(table)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Create or delete an Atlas cluster",
@@ -510,6 +551,8 @@ def parse_args() -> argparse.Namespace:
             help=f"Atlas cluster name (default: {ATLAS_CLUSTER_NAME})",
         )
 
+    subparsers.add_parser("list", help="List clusters and their status")
+
     if len(sys.argv) == 1:
         parser.print_help()
         sys.exit(0)
@@ -577,6 +620,8 @@ def main() -> None:
         pause_cluster(cluster_name=args.cluster_name, paused=True)
     elif args.command == "resume":
         pause_cluster(cluster_name=args.cluster_name, paused=False)
+    elif args.command == "list":
+        list_clusters()
     else:
         log("Unknown command.", style="bold red")
         sys.exit(1)

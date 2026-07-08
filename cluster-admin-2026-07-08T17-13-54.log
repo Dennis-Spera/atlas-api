@@ -1,0 +1,5 @@
+[17:13:54] Command : cluster-admin.py list
+[17:13:54] Started : 2026-07-08T17:13:54.337999
+[17:13:54] Log file: cluster-admin-2026-07-08T17-13-54.log
+[17:13:54] 
+[17:13:54] cluster=test-api state=IDLE paused=yes instanceSize=M20

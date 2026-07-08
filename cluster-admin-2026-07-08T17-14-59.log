@@ -1,0 +1,8 @@
+[17:14:59] Command : cluster-admin.py delete --cluster-name test-api
+[17:14:59] Started : 2026-07-08T17:14:59.380638
+[17:14:59] Log file: cluster-admin-2026-07-08T17-14-59.log
+[17:14:59] 
+[17:14:59] Deleting Atlas cluster: test-api
+[17:15:00] HTTP 202
+[17:15:00] Response body:
+[17:15:00] {}
