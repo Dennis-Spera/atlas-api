@@ -26,6 +26,7 @@ import argparse
 import json
 import sys
 import time
+from pathlib import Path
 from urllib.parse import quote
 
 import requests
@@ -55,27 +56,27 @@ def log_file_only(msg: str = "") -> None:
         for line in msg.splitlines() or [""]:
             _file_console.out(f"[{ts}] {line}")
 
-ATLAS_PUBLIC_KEY = "ldccslle"
-ATLAS_PRIVATE_KEY = "9fd730e2-4869-4f01-b553-195a9b807c60"
-ATLAS_GROUP_ID = "658eee9170ea5353a4cd9041"
+# Defaults are placeholders and should be overridden by config.json.
+ATLAS_PUBLIC_KEY = ""
+ATLAS_PRIVATE_KEY = ""
+ATLAS_GROUP_ID = ""
 
-ATLAS_CLUSTER_NAME = "api-master-cluster"
-ATLAS_MONGODB_VERSION = "8.0"
-ATLAS_PROVIDER = "AWS"
-ATLAS_REGION = "US_EAST_1"
-ATLAS_INSTANCE_SIZE = "M10"
-ATLAS_NODE_COUNT = 3
-ATLAS_REGION_PRIORITY = 7
-ATLAS_TAG_OWNER = "dennis.spera"
-ATLAS_TAG_KEEP_UNTIL = "2026-07-14"
-ATLAS_API_VERSION = "2025-03-12"
+ATLAS_CLUSTER_NAME = ""
+ATLAS_MONGODB_VERSION = ""
+ATLAS_PROVIDER = ""
+ATLAS_REGION = ""
+ATLAS_INSTANCE_SIZE = ""
+ATLAS_NODE_COUNT = 0
+ATLAS_REGION_PRIORITY = 0
+ATLAS_TAG_OWNER = ""
+ATLAS_TAG_KEEP_UNTIL = ""
+ATLAS_API_VERSION = ""
 
-BASE_URL = f"https://cloud.mongodb.com/api/atlas/v2/groups/{ATLAS_GROUP_ID}/clusters"
-HEADERS = {
-    "Accept": f"application/vnd.atlas.{ATLAS_API_VERSION}+json",
-    "Content-Type": "application/json",
-}
-AUTH = HTTPDigestAuth(ATLAS_PUBLIC_KEY, ATLAS_PRIVATE_KEY)
+CONFIG_PATH = Path(__file__).with_name("config.json")
+
+BASE_URL = ""
+HEADERS: dict[str, str] = {}
+AUTH = HTTPDigestAuth("", "")
 READY_TIMEOUT_SECONDS = 45 * 60
 READY_POLL_INTERVAL_SECONDS = 20
 PAUSE_RETRY_TIMEOUT_SECONDS = 15 * 60
@@ -85,6 +86,91 @@ INSTANCE_SIZE_LADDER = [
     "M10", "M20", "M30", "M40", "M50",
     "M60", "M80", "M140", "M200", "M300", "M400", "M700",
 ]
+
+
+def refresh_runtime_settings() -> None:
+    global BASE_URL, HEADERS, AUTH
+    BASE_URL = f"https://cloud.mongodb.com/api/atlas/v2/groups/{ATLAS_GROUP_ID}/clusters"
+    HEADERS = {
+        "Accept": f"application/vnd.atlas.{ATLAS_API_VERSION}+json",
+        "Content-Type": "application/json",
+    }
+    AUTH = HTTPDigestAuth(ATLAS_PUBLIC_KEY, ATLAS_PRIVATE_KEY)
+
+
+def load_atlas_config(config_path: Path = CONFIG_PATH) -> None:
+    if not config_path.exists():
+        refresh_runtime_settings()
+        return
+
+    try:
+        payload = json.loads(config_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        log(
+            f"Failed to read config file '{config_path}': {exc}. Using in-script defaults.",
+            style="bold yellow",
+        )
+        refresh_runtime_settings()
+        return
+
+    if not isinstance(payload, dict):
+        log(
+            f"Config file '{config_path}' must be a JSON object. Using in-script defaults.",
+            style="bold yellow",
+        )
+        refresh_runtime_settings()
+        return
+
+    for key, value in payload.items():
+        if not key.startswith("ATLAS_"):
+            continue
+        if key not in globals():
+            continue
+        globals()[key] = value
+
+    # Normalize known numeric Atlas settings when loaded from JSON/string values.
+    try:
+        globals()["ATLAS_NODE_COUNT"] = int(globals()["ATLAS_NODE_COUNT"])
+    except (TypeError, ValueError):
+        pass
+    try:
+        globals()["ATLAS_REGION_PRIORITY"] = int(globals()["ATLAS_REGION_PRIORITY"])
+    except (TypeError, ValueError):
+        pass
+
+    refresh_runtime_settings()
+
+
+def validate_atlas_config() -> None:
+    required_string_keys = [
+        "ATLAS_PUBLIC_KEY",
+        "ATLAS_PRIVATE_KEY",
+        "ATLAS_GROUP_ID",
+        "ATLAS_CLUSTER_NAME",
+        "ATLAS_MONGODB_VERSION",
+        "ATLAS_PROVIDER",
+        "ATLAS_REGION",
+        "ATLAS_INSTANCE_SIZE",
+        "ATLAS_TAG_OWNER",
+        "ATLAS_TAG_KEEP_UNTIL",
+        "ATLAS_API_VERSION",
+    ]
+
+    missing = [key for key in required_string_keys if not str(globals().get(key, "")).strip()]
+
+    if not isinstance(ATLAS_NODE_COUNT, int) or ATLAS_NODE_COUNT <= 0:
+        missing.append("ATLAS_NODE_COUNT")
+    if not isinstance(ATLAS_REGION_PRIORITY, int) or ATLAS_REGION_PRIORITY <= 0:
+        missing.append("ATLAS_REGION_PRIORITY")
+
+    if missing:
+        keys_text = ", ".join(sorted(set(missing)))
+        log(
+            "Missing or invalid ATLAS config values in config.json: "
+            f"{keys_text}",
+            style="bold red",
+        )
+        sys.exit(1)
 
 
 def print_response(response: requests.Response) -> None:
@@ -567,6 +653,8 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> None:
+    load_atlas_config()
+    validate_atlas_config()
     args = parse_args()
 
     global _file_console
