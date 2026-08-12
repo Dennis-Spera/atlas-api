@@ -90,12 +90,14 @@ rsync -a --delete \
   --exclude '.git/' \
   --exclude '__pycache__/' \
   --exclude 'config.json' \
+  --exclude '*.log' \
+  --exclude '*.log.*' \
   "$SCRIPT_DIR/" "$DEST_DIR/"
 
 pushd "$REPO_DIR" >/dev/null
 
 git add -A "$TARGET_DIR"
-git reset --quiet HEAD -- "$TARGET_DIR/config.json" || true
+git reset --quiet HEAD -- "$TARGET_DIR/config.json" "$TARGET_DIR"/*.log "$TARGET_DIR"/*.log.* 2>/dev/null || true
 if git diff --cached --quiet; then
   echo "No staged changes. Nothing to commit."
   exit 0
