@@ -1,0 +1,1711 @@
+[
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "REPLICATION_OPLOG_WINDOW_RUNNING_OUT",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd9042",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd9042",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd9043",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "threshold": {
+      "operator": "LESS_THAN",
+      "threshold": 1,
+      "units": "HOURS"
+    },
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "NO_PRIMARY",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd9046",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd9046",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 15,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd9047",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "CLUSTER_MONGOS_IS_MISSING",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd9049",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd9049",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 15,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd904a",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd904c",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd904c",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "CONNECTIONS_PERCENT",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 80.0,
+      "units": "RAW"
+    },
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd904d",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd904f",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd904f",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "DISK_PARTITION_SPACE_USED_DATA",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 90.0,
+      "units": "RAW"
+    },
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd9050",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd9052",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd9052",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "QUERY_TARGETING_SCANNED_OBJECTS_PER_RETURNED",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 1000.0,
+      "units": "RAW"
+    },
+    "notifications": [
+      {
+        "delayMin": 10,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd9053",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "CREDIT_CARD_ABOUT_TO_EXPIRE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd9057",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd9057",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 1440,
+        "notifierId": "658eee9170ea5353a4cd9058",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd905a",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd905a",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "NORMALIZED_SYSTEM_CPU_USER",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 95.0,
+      "units": "RAW"
+    },
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd905b",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "HOST_HAS_INDEX_SUGGESTIONS",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd905d",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd905d",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 10,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd905e",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "HOST_MONGOT_CRASHING_OOM",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd9060",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd9060",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd9061",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_SERVERLESS_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd9063",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd9063",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "SERVERLESS_CONNECTIONS_PERCENT",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 80.0,
+      "units": "RAW"
+    },
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd9064",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_SERVERLESS_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd9067",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd9067",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "SERVERLESS_DATA_SIZE_TOTAL",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 0.75,
+      "units": "TERABYTES"
+    },
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd9068",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_SERVERLESS_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd9077",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd9077",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "SERVERLESS_TOTAL_READ_UNITS",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 0.25,
+      "units": "MILLION_RPU"
+    },
+    "notifications": [
+      {
+        "delayMin": 30,
+        "emailEnabled": true,
+        "intervalMin": 720,
+        "notifierId": "658eee9170ea5353a4cd9078",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_SERVERLESS_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd9082",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd9082",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "SERVERLESS_TOTAL_READ_UNITS",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 1.0,
+      "units": "MILLION_RPU"
+    },
+    "notifications": [
+      {
+        "delayMin": 5,
+        "emailEnabled": true,
+        "intervalMin": 120,
+        "notifierId": "658eee9170ea5353a4cd9083",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "HOST_NOT_ENOUGH_DISK_SPACE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd9085",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd9085",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd9086",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd9089",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd9089",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "SEARCH_MAX_NUMBER_OF_LUCENE_DOCS",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 1.0,
+      "units": "BILLION"
+    },
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd908a",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2023-12-29T16:06:41Z",
+    "enabled": true,
+    "eventTypeName": "JOINED_GROUP",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "658eee9170ea5353a4cd908c",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/658eee9170ea5353a4cd908c",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "658eee9170ea5353a4cd908d",
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2023-12-29T16:06:41Z"
+  },
+  {
+    "created": "2024-01-30T21:12:27Z",
+    "enabled": true,
+    "eventTypeName": "FTS_INDEX_DELETION_FAILED",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "65b9663bbe45e41c6f1f09d3",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/65b9663bbe45e41c6f1f09d3",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "65b9663bbe45e41c6f1f09d4",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-01-30T21:12:27Z"
+  },
+  {
+    "created": "2024-01-30T21:12:27Z",
+    "enabled": true,
+    "eventTypeName": "FTS_INDEX_BUILD_COMPLETE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "65b9663bbe45e41c6f1f09d6",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/65b9663bbe45e41c6f1f09d6",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "65b9663bbe45e41c6f1f09d7",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-01-30T21:12:27Z"
+  },
+  {
+    "created": "2024-01-30T21:12:27Z",
+    "enabled": true,
+    "eventTypeName": "FTS_INDEX_BUILD_FAILED",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "65b9663bbe45e41c6f1f09d9",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/65b9663bbe45e41c6f1f09d9",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "65b9663bbe45e41c6f1f09da",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-01-30T21:12:27Z"
+  },
+  {
+    "created": "2024-01-30T21:12:27Z",
+    "enabled": true,
+    "eventTypeName": "FTS_INDEXES_RESTORE_FAILED",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "65b9663bbe45e41c6f1f09dc",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/65b9663bbe45e41c6f1f09dc",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "65b9663bbe45e41c6f1f09dd",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-01-30T21:12:27Z"
+  },
+  {
+    "created": "2024-08-12T22:51:03Z",
+    "enabled": true,
+    "eventTypeName": "DISK_AUTO_SCALE_INITIATED",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66ba91d7d8f27210b09f9ff4",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66ba91d7d8f27210b09f9ff4",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "66ba91d7d8f27210b09f9ff3",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-08-12T22:51:03Z"
+  },
+  {
+    "created": "2024-08-12T22:51:03Z",
+    "enabled": true,
+    "eventTypeName": "DISK_AUTO_SCALE_OPLOG_FAIL",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66ba91d7d8f27210b09fa07b",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66ba91d7d8f27210b09fa07b",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "66ba91d7d8f27210b09fa07a",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-08-12T22:51:03Z"
+  },
+  {
+    "created": "2024-08-12T22:51:03Z",
+    "enabled": true,
+    "eventTypeName": "DISK_AUTO_SCALE_MAX_DISK_SIZE_FAIL",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66ba91d7d8f27210b09fa103",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66ba91d7d8f27210b09fa103",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "66ba91d7d8f27210b09fa102",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-08-12T22:51:03Z"
+  },
+  {
+    "created": "2024-08-12T22:51:03Z",
+    "enabled": true,
+    "eventTypeName": "COMPUTE_AUTO_SCALE_INITIATED_BASE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66ba91d7d8f27210b09fa1b6",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66ba91d7d8f27210b09fa1b6",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "66ba91d7d8f27210b09fa1b3",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-08-12T22:51:03Z"
+  },
+  {
+    "created": "2024-08-12T22:51:03Z",
+    "enabled": true,
+    "eventTypeName": "COMPUTE_AUTO_SCALE_INITIATED_ANALYTICS",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66ba91d7d8f27210b09fa26b",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66ba91d7d8f27210b09fa26b",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "66ba91d7d8f27210b09fa26a",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-08-12T22:51:03Z"
+  },
+  {
+    "created": "2024-08-12T22:51:03Z",
+    "enabled": true,
+    "eventTypeName": "COMPUTE_AUTO_SCALE_MAX_INSTANCE_SIZE_FAIL_BASE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66ba91d7d8f27210b09fa2da",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66ba91d7d8f27210b09fa2da",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "66ba91d7d8f27210b09fa2d9",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-08-12T22:51:03Z"
+  },
+  {
+    "created": "2024-08-12T22:51:03Z",
+    "enabled": true,
+    "eventTypeName": "COMPUTE_AUTO_SCALE_MAX_INSTANCE_SIZE_FAIL_ANALYTICS",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66ba91d7d8f27210b09fa36a",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66ba91d7d8f27210b09fa36a",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "66ba91d7d8f27210b09fa369",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-08-12T22:51:03Z"
+  },
+  {
+    "created": "2024-08-12T22:51:03Z",
+    "enabled": true,
+    "eventTypeName": "COMPUTE_AUTO_SCALE_OPLOG_FAIL_BASE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66ba91d7d8f27210b09fa403",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66ba91d7d8f27210b09fa403",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "66ba91d7d8f27210b09fa402",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-08-12T22:51:03Z"
+  },
+  {
+    "created": "2024-08-12T22:51:03Z",
+    "enabled": true,
+    "eventTypeName": "COMPUTE_AUTO_SCALE_OPLOG_FAIL_ANALYTICS",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66ba91d7d8f27210b09fa4ae",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66ba91d7d8f27210b09fa4ae",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "66ba91d7d8f27210b09fa4ad",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-08-12T22:51:03Z"
+  },
+  {
+    "created": "2024-08-12T22:51:03Z",
+    "enabled": true,
+    "eventTypeName": "COMPUTE_AUTO_SCALE_SCALE_DOWN_FAIL_BASE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66ba91d7d8f27210b09fa53a",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66ba91d7d8f27210b09fa53a",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "66ba91d7d8f27210b09fa539",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-08-12T22:51:03Z"
+  },
+  {
+    "created": "2024-08-12T22:51:03Z",
+    "enabled": true,
+    "eventTypeName": "COMPUTE_AUTO_SCALE_SCALE_DOWN_FAIL_ANALYTICS",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66ba91d7d8f27210b09fa5c0",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66ba91d7d8f27210b09fa5c0",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "66ba91d7d8f27210b09fa5bf",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-08-12T22:51:03Z"
+  },
+  {
+    "created": "2024-09-04T18:41:12Z",
+    "enabled": true,
+    "eventTypeName": "TRIGGER_FAILURE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66d8a9c8f0867365ce18abcd",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66d8a9c8f0867365ce18abcd",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "66d8a9c8f0867365ce18abce",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-09-04T18:41:12Z"
+  },
+  {
+    "created": "2024-09-04T18:41:12Z",
+    "enabled": true,
+    "eventTypeName": "TRIGGER_AUTO_RESUMED",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66d8a9c8f0867365ce18abd2",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66d8a9c8f0867365ce18abd2",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "66d8a9c8f0867365ce18abd3",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-09-04T18:41:12Z"
+  },
+  {
+    "created": "2024-09-04T18:41:12Z",
+    "enabled": true,
+    "eventTypeName": "SYNC_FAILURE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66d8a9c8f0867365ce18abd6",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66d8a9c8f0867365ce18abd6",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "66d8a9c8f0867365ce18abd7",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-09-04T18:41:12Z"
+  },
+  {
+    "created": "2024-09-04T18:41:12Z",
+    "enabled": true,
+    "eventTypeName": "REQUEST_RATE_LIMIT",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66d8a9c8f0867365ce18abda",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66d8a9c8f0867365ce18abda",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "66d8a9c8f0867365ce18abdb",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-09-04T18:41:12Z"
+  },
+  {
+    "created": "2024-09-04T18:41:12Z",
+    "enabled": true,
+    "eventTypeName": "LOG_FORWARDER_FAILURE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "66d8a9c8f0867365ce18abde",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/66d8a9c8f0867365ce18abde",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "66d8a9c8f0867365ce18abdf",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-09-04T18:41:12Z"
+  },
+  {
+    "created": "2024-11-01T11:55:47Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_REALM_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "6724c3504be3da6aac33e173",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/6724c3504be3da6aac33e173",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "REALM_SDK_MQL_RESPONSE_MS",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 0.0,
+      "units": "NANOSECONDS"
+    },
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "6724c3504be3da6aac33e171",
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-11-01T12:02:24Z"
+  },
+  {
+    "created": "2024-11-13T17:31:52Z",
+    "enabled": true,
+    "eventTypeName": "HOST_MONGOT_STOP_REPLICATION",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "6734e28894f8802ae166b89a",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/6734e28894f8802ae166b89a",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "6734e28894f8802ae166b899",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2024-11-13T17:31:52Z"
+  },
+  {
+    "created": "2025-03-26T18:21:02Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_FLEX_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "67e4458e84375e150ba44507",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/67e4458e84375e150ba44507",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "FLEX_CONNECTIONS_PERCENT",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 80.0,
+      "units": "RAW"
+    },
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "6a5987fc0c57445d50cc32fe",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-03-26T18:21:02Z"
+  },
+  {
+    "created": "2025-03-26T18:33:21Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_FLEX_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "67e4487184375e150b7290b7",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/67e4487184375e150b7290b7",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "FLEX_DATA_SIZE_TOTAL",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 4.0,
+      "units": "GIGABYTES"
+    },
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "6a59897b0c57445d50ee4339",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-03-26T18:33:21Z"
+  },
+  {
+    "created": "2025-03-26T18:46:12Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_FLEX_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "67e44b7484375e150b4387a8",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/67e44b7484375e150b4387a8",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "FLEX_OPCOUNTER_TOTAL",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 200.0,
+      "units": "RAW"
+    },
+    "notifications": [
+      {
+        "delayMin": 1440,
+        "emailEnabled": true,
+        "intervalMin": 360,
+        "notifierId": "6a598acc0c57445d50111686",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-03-26T18:46:12Z"
+  },
+  {
+    "created": "2025-08-14T12:44:12Z",
+    "enabled": true,
+    "eventTypeName": "FTS_INDEXES_SYNONYM_MAPPING_INVALID",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "689dda1c80facd00a7ade8ca",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/689dda1c80facd00a7ade8ca",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "689dda1c80facd00a7ade8cb",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-08-14T12:44:12Z"
+  },
+  {
+    "created": "2025-08-14T16:34:18Z",
+    "enabled": true,
+    "eventTypeName": "CLUSTER_BLOCK_WRITE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "689e100a1904e91dfb0ac3f0",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/689e100a1904e91dfb0ac3f0",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 0,
+        "notifierId": "6a5aaf2db26b85cbc77e4c9d",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-08-14T16:34:18Z"
+  },
+  {
+    "created": "2025-08-14T17:01:53Z",
+    "enabled": true,
+    "eventTypeName": "CLUSTER_UNBLOCK_WRITE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "689e16811904e91dfb4bebc5",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/689e16811904e91dfb4bebc5",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 0,
+        "notifierId": "6a5ab192b26b85cbc7a60c46",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-08-14T17:01:53Z"
+  },
+  {
+    "created": "2025-10-07T19:54:08Z",
+    "enabled": true,
+    "eventTypeName": "HOST_MONGOT_APPROACHING_STOP_REPLICATION",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "68e56fe06d1ceb2c2064f37b",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/68e56fe06d1ceb2c2064f37b",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "68e56fe06d1ceb2c2064f37a",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-10-07T19:54:08Z"
+  },
+  {
+    "created": "2025-10-07T19:54:08Z",
+    "enabled": true,
+    "eventTypeName": "HOST_SEARCH_NODE_INDEX_FAILED",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "68e56fe06d1ceb2c2064f3ef",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/68e56fe06d1ceb2c2064f3ef",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "68e56fe06d1ceb2c2064f3ee",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-10-07T19:54:08Z"
+  },
+  {
+    "created": "2025-10-09T22:33:34Z",
+    "enabled": true,
+    "eventTypeName": "FTS_INDEX_STALE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "68e8383e6fd78a763e9875c5",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/68e8383e6fd78a763e9875c5",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "68e8383e6fd78a763e9875c4",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-10-09T22:33:34Z"
+  },
+  {
+    "created": "2025-11-03T21:41:18Z",
+    "enabled": true,
+    "eventTypeName": "PREDICTIVE_COMPUTE_AUTO_SCALE_INITIATED_BASE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "6909217ec5491ad739058dee",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/6909217ec5491ad739058dee",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 0,
+        "notifierId": "6a5ab6e8b26b85cbc7df4e35",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-11-03T21:41:18Z"
+  },
+  {
+    "created": "2025-11-03T21:41:18Z",
+    "enabled": true,
+    "eventTypeName": "PREDICTIVE_COMPUTE_AUTO_SCALE_OPLOG_FAIL_BASE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "6909217ec5491ad739058e19",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/6909217ec5491ad739058e19",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 0,
+        "notifierId": "6a5ab6e8b26b85cbc7df4e5f",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-11-03T21:41:18Z"
+  },
+  {
+    "created": "2025-11-03T21:41:18Z",
+    "enabled": true,
+    "eventTypeName": "PREDICTIVE_COMPUTE_AUTO_SCALE_MAX_INSTANCE_SIZE_FAIL_BASE",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "6909217ec5491ad739058e48",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/6909217ec5491ad739058e48",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 0,
+        "notifierId": "6a5ab6e8b26b85cbc7df4e8d",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-11-03T21:41:18Z"
+  },
+  {
+    "created": "2025-12-16T20:43:23Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "6941c46bb366df82411d67e3",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/6941c46bb366df82411d67e3",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "SEARCH_REQUIRED_MEMORY_USAGE_PERCENT",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 100.0,
+      "units": "RAW"
+    },
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "6a5abf4cb26b85cbc75de307",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2025-12-16T20:43:23Z"
+  },
+  {
+    "created": "2026-01-05T17:43:08Z",
+    "enabled": true,
+    "eventTypeName": "HOST_MONGOT_PAUSE_INITIAL_SYNC",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "695bf82cbaf03f64fc45aaa6",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/695bf82cbaf03f64fc45aaa6",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 5,
+        "notifierId": "695bf82cbaf03f64fc45aaa5",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2026-01-05T17:43:08Z"
+  },
+  {
+    "created": "2026-01-22T23:19:56Z",
+    "enabled": true,
+    "eventTypeName": "MONGOTUNE_ALERT",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "6972b09cfc6f8a458d13af84",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/6972b09cfc6f8a458d13af84",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 0,
+        "notifierId": "6a5ac277b26b85cbc795dfdc",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2026-01-22T23:19:56Z"
+  },
+  {
+    "created": "2026-01-30T20:52:50Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "697d1a2225fa8f94fc145d9e",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/697d1a2225fa8f94fc145d9e",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "SEARCH_MAX_NGRAM_FIELDS_INDEXED",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 100.0,
+      "units": "RAW"
+    },
+    "notifications": [
+      {
+        "delayMin": 60,
+        "emailEnabled": true,
+        "intervalMin": 10080,
+        "notifierId": "6a5ac625b26b85cbc7d5e384",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "severityOverride": "WARNING",
+    "updated": "2026-01-30T20:52:50Z"
+  },
+  {
+    "created": "2026-01-30T22:43:47Z",
+    "enabled": true,
+    "eventTypeName": "OUTSIDE_METRIC_THRESHOLD",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "697d342325fa8f94fc56086f",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/697d342325fa8f94fc56086f",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "metricThreshold": {
+      "metricName": "SEARCH_MAX_FIELDS_INDEXED",
+      "mode": "AVERAGE",
+      "operator": "GREATER_THAN",
+      "threshold": 1000.0,
+      "units": "RAW"
+    },
+    "notifications": [
+      {
+        "delayMin": 60,
+        "emailEnabled": true,
+        "intervalMin": 10080,
+        "notifierId": "6a5accc5986b3f0fe2c3ff9e",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "severityOverride": "WARNING",
+    "updated": "2026-01-30T22:43:47Z"
+  },
+  {
+    "created": "2026-03-31T16:30:13Z",
+    "enabled": true,
+    "eventTypeName": "PROFILER_CONFIGURED_TOO_WIDELY",
+    "groupId": "658eee9170ea5353a4cd9041",
+    "id": "69cbf6956d6d98517bb4d57e",
+    "links": [
+      {
+        "href": "https://cloud.mongodb.com/api/atlas/v2/groups/658eee9170ea5353a4cd9041/alertConfigs/69cbf6956d6d98517bb4d57e",
+        "rel": "self"
+      }
+    ],
+    "matchers": [],
+    "notifications": [
+      {
+        "delayMin": 0,
+        "emailEnabled": true,
+        "intervalMin": 60,
+        "notifierId": "69cbf6956d6d98517bb4d57d",
+        "roles": [
+          "GROUP_OWNER"
+        ],
+        "smsEnabled": false,
+        "typeName": "GROUP"
+      }
+    ],
+    "updated": "2026-03-31T16:30:13Z"
+  }
+]

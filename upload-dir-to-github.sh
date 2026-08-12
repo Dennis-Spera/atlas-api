@@ -89,11 +89,13 @@ echo "Syncing files from $SCRIPT_DIR to $DEST_DIR..."
 rsync -a --delete \
   --exclude '.git/' \
   --exclude '__pycache__/' \
+  --exclude 'config.json' \
   "$SCRIPT_DIR/" "$DEST_DIR/"
 
 pushd "$REPO_DIR" >/dev/null
 
 git add -A "$TARGET_DIR"
+git reset --quiet HEAD -- "$TARGET_DIR/config.json" || true
 if git diff --cached --quiet; then
   echo "No staged changes. Nothing to commit."
   exit 0

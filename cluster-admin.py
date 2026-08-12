@@ -71,6 +71,7 @@ ATLAS_REGION_PRIORITY = 0
 ATLAS_TAG_OWNER = ""
 ATLAS_TAG_KEEP_UNTIL = ""
 ATLAS_API_VERSION = ""
+ATLAS_LATEST_API_VERSION = "2025-03-12"
 
 CONFIG_PATH = Path(__file__).with_name("config.json")
 
@@ -88,11 +89,22 @@ INSTANCE_SIZE_LADDER = [
 ]
 
 
+def default_keep_until_date() -> str:
+    return (datetime.date.today() + datetime.timedelta(weeks=3)).isoformat()
+
+
+def resolve_accept_header(api_version: str) -> str:
+    normalized = str(api_version or "").strip().lower()
+    if normalized in {"latest", "auto"}:
+        return f"application/vnd.atlas.{ATLAS_LATEST_API_VERSION}+json"
+    return f"application/vnd.atlas.{api_version}+json"
+
+
 def refresh_runtime_settings() -> None:
     global BASE_URL, HEADERS, AUTH
     BASE_URL = f"https://cloud.mongodb.com/api/atlas/v2/groups/{ATLAS_GROUP_ID}/clusters"
     HEADERS = {
-        "Accept": f"application/vnd.atlas.{ATLAS_API_VERSION}+json",
+        "Accept": resolve_accept_header(ATLAS_API_VERSION),
         "Content-Type": "application/json",
     }
     AUTH = HTTPDigestAuth(ATLAS_PUBLIC_KEY, ATLAS_PRIVATE_KEY)
@@ -138,6 +150,10 @@ def load_atlas_config(config_path: Path = CONFIG_PATH) -> None:
     except (TypeError, ValueError):
         pass
 
+    keep_until = str(globals().get("ATLAS_TAG_KEEP_UNTIL", "")).strip()
+    if not keep_until or keep_until.upper() == "AUTO":
+        globals()["ATLAS_TAG_KEEP_UNTIL"] = default_keep_until_date()
+
     refresh_runtime_settings()
 
 
@@ -153,7 +169,6 @@ def validate_atlas_config() -> None:
         "ATLAS_INSTANCE_SIZE",
         "ATLAS_TAG_OWNER",
         "ATLAS_TAG_KEEP_UNTIL",
-        "ATLAS_API_VERSION",
     ]
 
     missing = [key for key in required_string_keys if not str(globals().get(key, "")).strip()]
@@ -162,6 +177,10 @@ def validate_atlas_config() -> None:
         missing.append("ATLAS_NODE_COUNT")
     if not isinstance(ATLAS_REGION_PRIORITY, int) or ATLAS_REGION_PRIORITY <= 0:
         missing.append("ATLAS_REGION_PRIORITY")
+
+    api_version_normalized = str(globals().get("ATLAS_API_VERSION", "")).strip().lower()
+    if not api_version_normalized:
+        missing.append("ATLAS_API_VERSION")
 
     if missing:
         keys_text = ", ".join(sorted(set(missing)))
@@ -672,6 +691,15 @@ def main() -> None:
     log(f"Command : {' '.join(sys.argv)}")
     log(f"Started : {datetime.datetime.now().isoformat()}")
     log(f"Log file: {log_path}")
+    accept_header = HEADERS.get("Accept", "")
+    api_version_value = str(ATLAS_API_VERSION).strip().lower()
+    if api_version_value in {"latest", "auto"}:
+        log(
+            "Atlas API mode: latest "
+            f"(resolved to {ATLAS_LATEST_API_VERSION}; Accept: {accept_header})"
+        )
+    else:
+        log(f"Atlas API mode: pinned (Accept: {accept_header})")
     log()
 
     if args.command == "create":
