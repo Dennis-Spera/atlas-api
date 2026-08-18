@@ -29,6 +29,8 @@ Edit the constants near the top of `cluster-admin.py` to set your defaults:
 | `ATLAS_PRIVATE_KEY` | Atlas API private key | `9fd730e2-...` |
 | `ATLAS_GROUP_ID` | Atlas project (group) ID | `658eee9170...` |
 | `ATLAS_CLUSTER_NAME` | Default cluster name | `api-master-cluster` |
+| `ATLAS_CLUSTER_TYPE` | Default cluster type (`REPLICASET` or `SHARDED`) | `REPLICASET` |
+| `ATLAS_NUM_SHARDS` | Number of shards for sharded clusters | `1` |
 | `ATLAS_MONGODB_VERSION` | MongoDB major version | `8.0` |
 | `ATLAS_PROVIDER` | Cloud provider | `AWS` |
 | `ATLAS_REGION` | Cloud region | `US_EAST_1` |
@@ -56,6 +58,7 @@ Use `--no-wait` to skip the readiness check.
 ```bash
 uv run cluster-admin.py create \
   --cluster-name YOUR_CLUSTER_NAME \
+  --cluster-type REPLICASET \
   --mongodb-version 8.0 \
   --provider AWS \
   --region US_EAST_1 \
@@ -65,9 +68,25 @@ uv run cluster-admin.py create \
   --tag-keep-until 2026-08-01
 ```
 
+```bash
+uv run cluster-admin.py create \
+  --cluster-name YOUR_SHARDED_CLUSTER_NAME \
+  --cluster-type SHARDED \
+  --num-shards 3 \
+  --mongodb-version 8.0 \
+  --provider AWS \
+  --region US_EAST_1 \
+  --instance-size M30 \
+  --node-count 3 \
+  --region-priority 7 \
+  --tag-keep-until 2026-08-01
+```
+
 | Flag | Description |
 |---|---|
 | `--cluster-name` | Cluster name |
+| `--cluster-type` | Atlas cluster type: `REPLICASET` or `SHARDED` |
+| `--num-shards` | Number of shards for a sharded cluster; Atlas may reject this field on some API versions, in which case the script retries without it while still creating a sharded cluster |
 | `--mongodb-version` | MongoDB major version (e.g. `8.0`; patch versions auto-normalized) |
 | `--provider` | Cloud provider (`AWS`, `GCP`, `AZURE`) |
 | `--region` | Provider region (e.g. `US_EAST_1`) |

@@ -1,19 +1,32 @@
 #!/usr/bin/env python3
 """Usage:
     python cluster-admin.py create
-    python cluster-admin.py create --no-wait
+    python cluster-admin.py create --cluster-type SHARDED --num-shards 3 --no-wait
     python cluster-admin.py create --timeout 3600 --poll-interval 30
     python cluster-admin.py delete
 
         # Override template (copy/paste)
         python cluster-admin.py create \
             --cluster-name YOUR_CLUSTER_NAME \
+            --cluster-type REPLICASET \
             --mongodb-version YOUR_MONGODB_VERSION \
             --provider YOUR_PROVIDER \
             --region YOUR_REGION \
             --instance-size YOUR_INSTANCE_SIZE \
             --node-count YOUR_NODE_COUNT \
             --region-priority YOUR_REGION_PRIORITY \
+            --tag-keep-until YYYY-MM-DD
+
+        python cluster-admin.py create \
+            --cluster-name YOUR_SHARDED_CLUSTER_NAME \
+            --cluster-type SHARDED \
+            --num-shards 3 \
+            --mongodb-version 8.0 \
+            --provider AWS \
+            --region US_EAST_1 \
+            --instance-size M30 \
+            --node-count 3 \
+            --region-priority 7 \
             --tag-keep-until YYYY-MM-DD
 
         python cluster-admin.py delete --cluster-name YOUR_CLUSTER_NAME
@@ -62,6 +75,8 @@ ATLAS_PRIVATE_KEY = ""
 ATLAS_GROUP_ID = ""
 
 ATLAS_CLUSTER_NAME = ""
+ATLAS_CLUSTER_TYPE = "REPLICASET"
+ATLAS_NUM_SHARDS = 1
 ATLAS_MONGODB_VERSION = ""
 ATLAS_PROVIDER = ""
 ATLAS_REGION = ""
@@ -149,6 +164,10 @@ def load_atlas_config(config_path: Path = CONFIG_PATH) -> None:
         globals()["ATLAS_REGION_PRIORITY"] = int(globals()["ATLAS_REGION_PRIORITY"])
     except (TypeError, ValueError):
         pass
+    try:
+        globals()["ATLAS_NUM_SHARDS"] = int(globals()["ATLAS_NUM_SHARDS"])
+    except (TypeError, ValueError):
+        pass
 
     keep_until = str(globals().get("ATLAS_TAG_KEEP_UNTIL", "")).strip()
     if not keep_until or keep_until.upper() == "AUTO":
@@ -173,10 +192,19 @@ def validate_atlas_config() -> None:
 
     missing = [key for key in required_string_keys if not str(globals().get(key, "")).strip()]
 
+    cluster_type = str(globals().get("ATLAS_CLUSTER_TYPE", "REPLICASET")).strip().upper()
+    if cluster_type not in {"REPLICASET", "SHARDED"}:
+        missing.append("ATLAS_CLUSTER_TYPE")
+    else:
+        globals()["ATLAS_CLUSTER_TYPE"] = cluster_type
+
     if not isinstance(ATLAS_NODE_COUNT, int) or ATLAS_NODE_COUNT <= 0:
         missing.append("ATLAS_NODE_COUNT")
     if not isinstance(ATLAS_REGION_PRIORITY, int) or ATLAS_REGION_PRIORITY <= 0:
         missing.append("ATLAS_REGION_PRIORITY")
+    if not isinstance(ATLAS_NUM_SHARDS, int) or ATLAS_NUM_SHARDS <= 0:
+        if cluster_type == "SHARDED":
+            missing.append("ATLAS_NUM_SHARDS")
 
     api_version_normalized = str(globals().get("ATLAS_API_VERSION", "")).strip().lower()
     if not api_version_normalized:
@@ -244,17 +272,27 @@ def normalize_mongodb_major_version(version: str) -> str:
 
 def create_cluster(
     cluster_name: str = ATLAS_CLUSTER_NAME,
+    cluster_type: str = ATLAS_CLUSTER_TYPE,
     mongodb_version: str = ATLAS_MONGODB_VERSION,
     provider: str = ATLAS_PROVIDER,
     region: str = ATLAS_REGION,
     instance_size: str = ATLAS_INSTANCE_SIZE,
     node_count: int = ATLAS_NODE_COUNT,
     region_priority: int = ATLAS_REGION_PRIORITY,
+    num_shards: int = ATLAS_NUM_SHARDS,
     tag_keep_until: str = ATLAS_TAG_KEEP_UNTIL,
     wait: bool = True,
     timeout_seconds: int = READY_TIMEOUT_SECONDS,
     poll_interval_seconds: int = READY_POLL_INTERVAL_SECONDS,
 ) -> None:
+    normalized_cluster_type = str(cluster_type or "REPLICASET").strip().upper()
+    if normalized_cluster_type not in {"REPLICASET", "SHARDED"}:
+        log(
+            f"Unsupported cluster type '{cluster_type}'. Expected REPLICASET or SHARDED.",
+            style="bold red",
+        )
+        sys.exit(1)
+
     normalized_mongodb_version = normalize_mongodb_major_version(mongodb_version)
     if normalized_mongodb_version != mongodb_version:
         log(
@@ -263,32 +301,35 @@ def create_cluster(
             style="yellow",
         )
 
+    replication_spec = {
+        "regionConfigs": [
+            {
+                "providerName": provider,
+                "regionName": region,
+                "priority": region_priority,
+                "electableSpecs": {
+                    "instanceSize": instance_size,
+                    "nodeCount": node_count,
+                },
+            }
+        ],
+    }
+
     payload = {
         "name": cluster_name,
-        "clusterType": "REPLICASET",
+        "clusterType": normalized_cluster_type,
         "mongoDBMajorVersion": normalized_mongodb_version,
         "tags": [
             {"key": "owner", "value": ATLAS_TAG_OWNER},
             {"key": "keep_until", "value": tag_keep_until},
         ],
-        "replicationSpecs": [
-            {
-                "regionConfigs": [
-                    {
-                        "providerName": provider,
-                        "regionName": region,
-                        "priority": region_priority,
-                        "electableSpecs": {
-                            "instanceSize": instance_size,
-                            "nodeCount": node_count,
-                        },
-                    }
-                ],
-            }
-        ],
+        "replicationSpecs": [replication_spec],
     }
 
-    log(f"Creating Atlas cluster: {cluster_name}", style="bold")
+    if normalized_cluster_type == "SHARDED":
+        payload["replicationSpecs"][0]["numShards"] = int(num_shards)
+
+    log(f"Creating Atlas {normalized_cluster_type.lower()} cluster: {cluster_name}", style="bold")
     response = requests.post(
         BASE_URL,
         headers=HEADERS,
@@ -296,6 +337,25 @@ def create_cluster(
         auth=AUTH,
         timeout=60,
     )
+
+    if (
+        normalized_cluster_type == "SHARDED"
+        and response.status_code == 400
+        and "numShards" in response.text
+    ):
+        log(
+            "Atlas rejected numShards on this API version; retrying create without it.",
+            style="yellow",
+        )
+        payload["replicationSpecs"][0].pop("numShards", None)
+        response = requests.post(
+            BASE_URL,
+            headers=HEADERS,
+            json=payload,
+            auth=AUTH,
+            timeout=60,
+        )
+
     print_response(response)
     if wait:
         wait_for_cluster_ready(
@@ -573,6 +633,18 @@ def parse_args() -> argparse.Namespace:
         help=f"Atlas cluster name (default: {ATLAS_CLUSTER_NAME})",
     )
     create_parser.add_argument(
+        "--cluster-type",
+        choices=["REPLICASET", "SHARDED"],
+        default=ATLAS_CLUSTER_TYPE,
+        help=f"Atlas cluster type (default: {ATLAS_CLUSTER_TYPE})",
+    )
+    create_parser.add_argument(
+        "--num-shards",
+        type=int,
+        default=ATLAS_NUM_SHARDS,
+        help=f"Number of shards for a SHARDED cluster (default: {ATLAS_NUM_SHARDS})",
+    )
+    create_parser.add_argument(
         "--mongodb-version",
         default=ATLAS_MONGODB_VERSION,
         help=f"MongoDB major version (default: {ATLAS_MONGODB_VERSION})",
@@ -712,15 +784,20 @@ def main() -> None:
         if args.node_count <= 0:
             log("--node-count must be greater than 0", style="bold red")
             sys.exit(1)
+        if args.num_shards <= 0:
+            log("--num-shards must be greater than 0", style="bold red")
+            sys.exit(1)
 
         create_cluster(
             cluster_name=args.cluster_name,
+            cluster_type=args.cluster_type,
             mongodb_version=args.mongodb_version,
             provider=args.provider,
             region=args.region,
             instance_size=args.instance_size,
             node_count=args.node_count,
             region_priority=args.region_priority,
+            num_shards=args.num_shards,
             tag_keep_until=args.tag_keep_until,
             wait=args.wait,
             timeout_seconds=args.timeout,
