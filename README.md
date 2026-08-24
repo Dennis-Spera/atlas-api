@@ -1,7 +1,7 @@
 # 🍃 cluster-admin.py
 
 A command-line tool for managing **MongoDB Atlas clusters** via the Atlas API.  
-Supports creating, deleting, scaling, pausing, and resuming clusters — with a live status display and automatic run logging.
+Supports creating, deleting, scaling, pausing, resuming, and updating cluster tags — with a live status display and automatic run logging.
 
 ---
 
@@ -97,6 +97,45 @@ uv run cluster-admin.py create \
 | `--wait` / `--no-wait` | Wait for readiness (default: `--wait`) |
 | `--timeout` | Readiness timeout in seconds (default: `2700`) |
 | `--poll-interval` | Poll interval in seconds (default: `20`) |
+
+---
+
+### `update-tag` — Update the `keep_until` tag
+
+Updates the `keep_until` tag on an existing cluster through the Atlas API. The command retrieves the current tags first, so other cluster tags are preserved.
+
+```bash
+uv run cluster-admin.py update-tag \
+  --tag-keep-until 2026-09-04
+```
+
+Use `--cluster-name` to override the configured cluster name:
+
+```bash
+uv run cluster-admin.py update-tag \
+  --cluster-name my-cluster \
+  --tag-keep-until 2026-09-04
+```
+
+The value must use the `YYYY-MM-DD` format. Changing `ATLAS_TAG_KEEP_UNTIL` in `config.json` affects future `create` operations; use `update-tag` for an existing cluster.
+
+---
+
+### `list-tags` — List cluster tags
+
+Lists all tags on the configured Atlas cluster through the Atlas API:
+
+```bash
+uv run cluster-admin.py list-tags
+```
+
+Use `--cluster-name` to list tags for a different cluster:
+
+```bash
+uv run cluster-admin.py list-tags --cluster-name my-cluster
+```
+
+The results are displayed as a table and included in the generated log file.
 
 ---
 

@@ -4,6 +4,8 @@
     python cluster-admin.py create --cluster-type SHARDED --num-shards 3 --no-wait
     python cluster-admin.py create --timeout 3600 --poll-interval 30
     python cluster-admin.py delete
+    python cluster-admin.py list-tags
+    python cluster-admin.py update-tag --tag-keep-until YYYY-MM-DD
 
         # Override template (copy/paste)
         python cluster-admin.py create \
@@ -589,6 +591,76 @@ def list_clusters() -> None:
     _console.print(table)
 
 
+def update_cluster_tag(
+    cluster_name: str = ATLAS_CLUSTER_NAME,
+    tag_keep_until: str = ATLAS_TAG_KEEP_UNTIL,
+) -> None:
+    cluster_url = f"{BASE_URL}/{quote(cluster_name, safe='')}"
+    log(f"Updating keep_until tag for Atlas cluster: {cluster_name}", style="bold")
+
+    response = requests.get(cluster_url, headers=HEADERS, auth=AUTH, timeout=60)
+    if response.status_code == 404:
+        log(f"Cluster '{cluster_name}' does not exist.", style="bold red")
+        sys.exit(1)
+    response.raise_for_status()
+
+    cluster_info = response.json()
+    tags = cluster_info.get("tags", [])
+    if not isinstance(tags, list):
+        log("Cluster tags response is not a list.", style="bold red")
+        sys.exit(1)
+
+    updated = False
+    for tag in tags:
+        if tag.get("key") == "keep_until":
+            tag["value"] = tag_keep_until
+            updated = True
+            break
+    if not updated:
+        tags.append({"key": "keep_until", "value": tag_keep_until})
+
+    response = requests.patch(
+        cluster_url,
+        headers=HEADERS,
+        json={"tags": tags},
+        auth=AUTH,
+        timeout=60,
+    )
+    print_response(response)
+
+
+def list_cluster_tags(cluster_name: str = ATLAS_CLUSTER_NAME) -> None:
+    cluster_url = f"{BASE_URL}/{quote(cluster_name, safe='')}"
+    log(f"Listing tags for Atlas cluster: {cluster_name}", style="bold")
+
+    response = requests.get(cluster_url, headers=HEADERS, auth=AUTH, timeout=60)
+    if response.status_code == 404:
+        log(f"Cluster '{cluster_name}' does not exist.", style="bold red")
+        sys.exit(1)
+    response.raise_for_status()
+
+    tags = response.json().get("tags", [])
+    if not isinstance(tags, list):
+        log("Cluster tags response is not a list.", style="bold red")
+        sys.exit(1)
+
+    if not tags:
+        log("No tags found.", style="yellow")
+        log_file_only("No tags found.")
+        return
+
+    table = Table(title=f"Tags for {cluster_name}")
+    table.add_column("Key", style="cyan")
+    table.add_column("Value")
+    for tag in tags:
+        key = str(tag.get("key", "-"))
+        value = str(tag.get("value", "-"))
+        table.add_row(key, value)
+        log_file_only(f"tag={key} value={value}")
+
+    _console.print(table)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Create or delete an Atlas cluster",
@@ -695,6 +767,29 @@ def parse_args() -> argparse.Namespace:
             "Readiness poll interval in seconds "
             f"(default: {READY_POLL_INTERVAL_SECONDS})"
         ),
+    )
+
+    update_tag_parser = subparsers.add_parser(
+        "update-tag", help="Update the configured Atlas cluster keep_until tag"
+    )
+    update_tag_parser.add_argument(
+        "--cluster-name",
+        default=ATLAS_CLUSTER_NAME,
+        help=f"Atlas cluster name (default: {ATLAS_CLUSTER_NAME})",
+    )
+    update_tag_parser.add_argument(
+        "--tag-keep-until",
+        required=True,
+        help="keep_until tag value (YYYY-MM-DD)",
+    )
+
+    list_tags_parser = subparsers.add_parser(
+        "list-tags", help="List all tags on the configured Atlas cluster"
+    )
+    list_tags_parser.add_argument(
+        "--cluster-name",
+        default=ATLAS_CLUSTER_NAME,
+        help=f"Atlas cluster name (default: {ATLAS_CLUSTER_NAME})",
     )
 
     delete_parser = subparsers.add_parser(
@@ -805,6 +900,13 @@ def main() -> None:
         )
     elif args.command == "delete":
         delete_cluster(cluster_name=args.cluster_name)
+    elif args.command == "update-tag":
+        update_cluster_tag(
+            cluster_name=args.cluster_name,
+            tag_keep_until=args.tag_keep_until,
+        )
+    elif args.command == "list-tags":
+        list_cluster_tags(cluster_name=args.cluster_name)
     elif args.command == "scale-up":
         scale_cluster(cluster_name=args.cluster_name, direction="up")
     elif args.command == "scale-down":
