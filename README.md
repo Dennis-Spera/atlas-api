@@ -144,22 +144,22 @@ uv run cluster-admin.py create \
     <col>
   </colgroup>
   <thead>
-    <tr><th>Flag&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th>Description</th></tr>
+    <tr><th nowrap>Flag&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>--cluster-name</code></td><td>Cluster name</td></tr>
-    <tr><td><code>--cluster-type</code></td><td>Atlas cluster type: <code>REPLICASET</code> or <code>SHARDED</code></td></tr>
-    <tr><td><code>--num-shards</code></td><td>Number of shards for a sharded cluster; Atlas may reject this field on some API versions, in which case the script retries without it while still creating a sharded cluster</td></tr>
-    <tr><td><code>--mongodb-version</code></td><td>MongoDB major version (for example, <code>8.0</code>; patch versions are auto-normalized)</td></tr>
-    <tr><td><code>--provider</code></td><td>Cloud provider (<code>AWS</code>, <code>GCP</code>, <code>AZURE</code>)</td></tr>
-    <tr><td><code>--region</code></td><td>Provider region (for example, <code>US_EAST_1</code>)</td></tr>
-    <tr><td><code>--instance-size</code></td><td>Instance tier (for example, <code>M10</code>, <code>M30</code>)</td></tr>
-    <tr><td><code>--node-count</code></td><td>Number of electable nodes</td></tr>
-    <tr><td><code>--region-priority</code></td><td>Region priority (1-7)</td></tr>
-    <tr><td><code>--tag-keep-until</code></td><td><code>keep_until</code> tag value (<code>YYYY-MM-DD</code>)</td></tr>
-    <tr><td><code>--wait</code> / <code>--no-wait</code></td><td>Wait for readiness (default: <code>--wait</code>)</td></tr>
-    <tr><td><code>--timeout</code></td><td>Readiness timeout in seconds (default: <code>2700</code>)</td></tr>
-    <tr><td><code>--poll-interval</code></td><td>Poll interval in seconds (default: <code>20</code>)</td></tr>
+    <tr><td nowrap><code>--cluster-name</code></td><td>Cluster name</td></tr>
+    <tr><td nowrap><code>--cluster-type</code></td><td>Atlas cluster type: <code>REPLICASET</code> or <code>SHARDED</code></td></tr>
+    <tr><td nowrap><code>--num-shards</code></td><td>Number of shards for a sharded cluster; Atlas may reject this field on some API versions, in which case the script retries without it while still creating a sharded cluster</td></tr>
+    <tr><td nowrap><code>--mongodb-version</code></td><td>MongoDB major version (for example, <code>8.0</code>; patch versions are auto-normalized)</td></tr>
+    <tr><td nowrap><code>--provider</code></td><td>Cloud provider (<code>AWS</code>, <code>GCP</code>, <code>AZURE</code>)</td></tr>
+    <tr><td nowrap><code>--region</code></td><td>Provider region (for example, <code>US_EAST_1</code>)</td></tr>
+    <tr><td nowrap><code>--instance-size</code></td><td>Instance tier (for example, <code>M10</code>, <code>M30</code>)</td></tr>
+    <tr><td nowrap><code>--node-count</code></td><td>Number of electable nodes</td></tr>
+    <tr><td nowrap><code>--region-priority</code></td><td>Region priority (1-7)</td></tr>
+    <tr><td nowrap><code>--tag-keep-until</code></td><td><code>keep_until</code> tag value (<code>YYYY-MM-DD</code>)</td></tr>
+    <tr><td nowrap><code>--wait</code> / <code>--no-wait</code></td><td>Wait for readiness (default: <code>--wait</code>)</td></tr>
+    <tr><td nowrap><code>--timeout</code></td><td>Readiness timeout in seconds (default: <code>2700</code>)</td></tr>
+    <tr><td nowrap><code>--poll-interval</code></td><td>Poll interval in seconds (default: <code>20</code>)</td></tr>
   </tbody>
 </table>
 
