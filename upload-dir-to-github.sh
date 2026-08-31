@@ -94,10 +94,12 @@ rsync -a --delete \
   --exclude '*.log.*' \
   "$SCRIPT_DIR/" "$DEST_DIR/"
 
+find "$DEST_DIR" -type f \( -name '*.log' -o -name '*.log.*' \) -delete
+
 pushd "$REPO_DIR" >/dev/null
 
 git add -A "$TARGET_DIR"
-git reset --quiet HEAD -- "$TARGET_DIR/config.json" "$TARGET_DIR"/*.log "$TARGET_DIR"/*.log.* 2>/dev/null || true
+git reset --quiet HEAD -- "$TARGET_DIR/config.json" 2>/dev/null || true
 if git diff --cached --quiet; then
   echo "No staged changes. Nothing to commit."
   exit 0
