@@ -138,21 +138,30 @@ uv run cluster-admin.py create \
   --tag-keep-until 2026-08-01
 ```
 
-| Flag | Description |
-|---|---|
-| `--cluster-name` | Cluster name |
-| `--cluster-type` | Atlas cluster type: `REPLICASET` or `SHARDED` |
-| `--num-shards` | Number of shards for a sharded cluster; Atlas may reject this field on some API versions, in which case the script retries without it while still creating a sharded cluster |
-| `--mongodb-version` | MongoDB major version (e.g. `8.0`; patch versions auto-normalized) |
-| `--provider` | Cloud provider (`AWS`, `GCP`, `AZURE`) |
-| `--region` | Provider region (e.g. `US_EAST_1`) |
-| `--instance-size` | Instance tier (e.g. `M10`, `M30`) |
-| `--node-count` | Number of electable nodes |
-| `--region-priority` | Region priority (1–7) |
-| `--tag-keep-until` | `keep_until` tag value (`YYYY-MM-DD`) |
-| `--wait` / `--no-wait` | Wait for readiness (default: `--wait`) |
-| `--timeout` | Readiness timeout in seconds (default: `2700`) |
-| `--poll-interval` | Poll interval in seconds (default: `20`) |
+<table>
+  <colgroup>
+    <col width="30%">
+    <col>
+  </colgroup>
+  <thead>
+    <tr><th>Flag</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>--cluster-name</code></td><td>Cluster name</td></tr>
+    <tr><td><code>--cluster-type</code></td><td>Atlas cluster type: <code>REPLICASET</code> or <code>SHARDED</code></td></tr>
+    <tr><td><code>--num-shards</code></td><td>Number of shards for a sharded cluster; Atlas may reject this field on some API versions, in which case the script retries without it while still creating a sharded cluster</td></tr>
+    <tr><td><code>--mongodb-version</code></td><td>MongoDB major version (for example, <code>8.0</code>; patch versions are auto-normalized)</td></tr>
+    <tr><td><code>--provider</code></td><td>Cloud provider (<code>AWS</code>, <code>GCP</code>, <code>AZURE</code>)</td></tr>
+    <tr><td><code>--region</code></td><td>Provider region (for example, <code>US_EAST_1</code>)</td></tr>
+    <tr><td><code>--instance-size</code></td><td>Instance tier (for example, <code>M10</code>, <code>M30</code>)</td></tr>
+    <tr><td><code>--node-count</code></td><td>Number of electable nodes</td></tr>
+    <tr><td><code>--region-priority</code></td><td>Region priority (1-7)</td></tr>
+    <tr><td><code>--tag-keep-until</code></td><td><code>keep_until</code> tag value (<code>YYYY-MM-DD</code>)</td></tr>
+    <tr><td><code>--wait</code> / <code>--no-wait</code></td><td>Wait for readiness (default: <code>--wait</code>)</td></tr>
+    <tr><td><code>--timeout</code></td><td>Readiness timeout in seconds (default: <code>2700</code>)</td></tr>
+    <tr><td><code>--poll-interval</code></td><td>Poll interval in seconds (default: <code>20</code>)</td></tr>
+  </tbody>
+</table>
 
 ---
 
