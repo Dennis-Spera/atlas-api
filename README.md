@@ -42,6 +42,62 @@ Edit the constants near the top of `cluster-admin.py` to set your defaults:
 
 ---
 
+## Additional Utilities
+
+The following scripts load the same Atlas credentials from `config.json`. That
+file is ignored by Git and must contain valid `ATLAS_PUBLIC_KEY`,
+`ATLAS_PRIVATE_KEY`, and `ATLAS_GROUP_ID` values.
+
+### `control_plane_ip.py`
+
+Prints Atlas control-plane outbound IP addresses. Run without options for the
+complete response, or select an AWS region and output format:
+
+```bash
+uv run python control_plane_ip.py
+uv run python control_plane_ip.py --region US_EAST_1
+uv run python control_plane_ip.py --region US_EAST_1 --count
+uv run python control_plane_ip.py --region US_EAST_1 --md
+```
+
+### `create_alert_manual_scaling.py`
+
+Creates a project alert for an explicitly supplied Atlas event type. Use
+`--dry-run` to inspect the request before creating an alert:
+
+```bash
+uv run python create_alert_manual_scaling.py \
+  --event-type CLUSTER_STATE_CHANGED --dry-run
+uv run python create_alert_manual_scaling.py \
+  --event-type CLUSTER_STATE_CHANGED
+```
+
+### `create_alert_space_utilization.py`
+
+Creates an `OUTSIDE_METRIC_THRESHOLD` alert for cluster storage utilization. It
+defaults to `DISK_PARTITION_SPACE_USED_DATA` at 85 percent:
+
+```bash
+uv run python create_alert_space_utilization.py \
+  --cluster-name my-cluster --storage-threshold 85 --dry-run
+uv run python create_alert_space_utilization.py \
+  --cluster-name my-cluster --storage-threshold 85
+```
+
+Use `--metric-name`, `--operator`, `--units`, and `--mode` to customize the
+Atlas metric threshold.
+
+### `list_alerts.py`
+
+Lists every alert configuration in the configured Atlas project as formatted
+JSON:
+
+```bash
+uv run python list_alerts.py
+```
+
+---
+
 ## 🚀 Commands
 
 ### `create` — Create a cluster
