@@ -144,7 +144,7 @@ uv run cluster-admin.py create \
     <col>
   </colgroup>
   <thead>
-    <tr><th>Flag</th><th>Description</th></tr>
+    <tr><th>Flag&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th>Description</th></tr>
   </thead>
   <tbody>
     <tr><td><code>--cluster-name</code></td><td>Cluster name</td></tr>
