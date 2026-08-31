@@ -140,7 +140,7 @@ uv run cluster-admin.py create \
 
 <table>
   <colgroup>
-    <col width="30%">
+    <col width="40%">
     <col>
   </colgroup>
   <thead>
