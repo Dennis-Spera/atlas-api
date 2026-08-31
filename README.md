@@ -25,8 +25,8 @@ Edit the constants near the top of `cluster-admin.py` to set your defaults:
 
 | Constant | Description | Default |
 |---|---|---|
-| `ATLAS_PUBLIC_KEY` | Atlas API public key | `ldccslle` |
-| `ATLAS_PRIVATE_KEY` | Atlas API private key | `9fd730e2-...` |
+| `ATLAS_PUBLIC_KEY` | Atlas API public key | `<your-atlas-public-key>` |
+| `ATLAS_PRIVATE_KEY` | Atlas API private key | `<your-atlas-private-key>` |
 | `ATLAS_GROUP_ID` | Atlas project (group) ID | `658eee9170...` |
 | `ATLAS_CLUSTER_NAME` | Default cluster name | `api-master-cluster` |
 | `ATLAS_CLUSTER_TYPE` | Default cluster type (`REPLICASET` or `SHARDED`) | `REPLICASET` |
